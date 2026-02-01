@@ -1,5 +1,5 @@
 import { blogs } from "#site/content";
-import { PageHeader } from "@/components/sections";
+import { PageHeader } from "@/components/sections/page-header";
 import { BlogsList } from "@/components/blogs";
 import type { Metadata } from "next";
 import { siteConfig } from "@/config/site.config";

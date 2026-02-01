@@ -1,5 +1,6 @@
 import { projects } from "#site/content";
-import { PageHeader, ProjectsList } from "@/components/sections";
+import { PageHeader } from "@/components/sections/page-header";
+import { ProjectsList } from "@/components/sections/projects-list";
 import type { Metadata } from "next";
 import { siteConfig } from "@/config/site.config";
 import Link from "next/link";
