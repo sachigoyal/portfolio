@@ -27,7 +27,7 @@ export function Projects() {
   }, [sort]);
 
   return (
-    <div className="mt-7 text-sm">
+    <div className="text-sm">
       <div className="flex items-center justify-between">
         <p className="font-semibold text-lg">{sort === "featured" ? "Featured projects" : "Latest projects"}</p>
         <div className="flex items-center gap-0.5 p-0.5 bg-muted rounded-md relative">

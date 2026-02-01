@@ -22,7 +22,7 @@
   --color-chart-2: var(--chart-2);
   --color-chart-1: var(--chart-1);
   --color-ring: var(--ring);
-  --color-input: var(--input);  
+  --color-input: var(--input);
   --color-border: var(--border);
   --color-destructive: var(--destructive);
   --color-accent-foreground: var(--accent-foreground);
@@ -79,6 +79,13 @@
   --sidebar-accent-foreground: oklch(0.205 0 0);
   --sidebar-border: oklch(0.922 0 0);
   --sidebar-ring: oklch(0.708 0 0);
+
+  /* gitmap */
+  --gitmap-ocean-empty: #ebedf0;
+  --gitmap-ocean-level-1: #a8dadc;
+  --gitmap-ocean-level-2: #457b9d;
+  --gitmap-ocean-level-3: #1d3557;
+  --gitmap-ocean-level-4: #0d1b2a;
 }
 
 .dark {
@@ -113,12 +120,27 @@
   --sidebar-accent-foreground: oklch(0.985 0 0);
   --sidebar-border: oklch(1 0 0 / 10%);
   --sidebar-ring: oklch(0.556 0 0);
+
+  --gitmap-ocean-empty: #161b22;
+  --gitmap-ocean-level-1: #0d1b2a;
+  --gitmap-ocean-level-2: #1d3557;
+  --gitmap-ocean-level-3: #457b9d;
+  --gitmap-ocean-level-4: #a8dadc;
+}
+
+[data-gitmap-theme="ocean"] {
+  --gitmap-empty: var(--gitmap-ocean-empty);
+  --gitmap-level-1: var(--gitmap-ocean-level-1);
+  --gitmap-level-2: var(--gitmap-ocean-level-2);
+  --gitmap-level-3: var(--gitmap-ocean-level-3);
+  --gitmap-level-4: var(--gitmap-ocean-level-4);
 }
 
 @layer base {
   * {
     @apply border-border outline-ring/50;
   }
+
   body {
     @apply bg-background text-foreground;
   }
@@ -152,26 +174,52 @@
   0% {
     mask-size: 0;
   }
+
   10% {
     mask-size: 50vmax;
   }
+
   90% {
     mask-size: 50vmax;
   }
+
   100% {
     mask-size: 2000vmax;
   }
 }
 
 @keyframes wave {
-  0% { transform: rotate(0deg); }
-  10% { transform: rotate(14deg); }
-  20% { transform: rotate(-8deg); }
-  30% { transform: rotate(14deg); }
-  40% { transform: rotate(-4deg); }
-  50% { transform: rotate(10deg); }
-  60% { transform: rotate(0deg); }
-  100% { transform: rotate(0deg); }
+  0% {
+    transform: rotate(0deg);
+  }
+
+  10% {
+    transform: rotate(14deg);
+  }
+
+  20% {
+    transform: rotate(-8deg);
+  }
+
+  30% {
+    transform: rotate(14deg);
+  }
+
+  40% {
+    transform: rotate(-4deg);
+  }
+
+  50% {
+    transform: rotate(10deg);
+  }
+
+  60% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(0deg);
+  }
 }
 
 .wave {
@@ -206,9 +254,8 @@
   --delay: 0.1s;
   --ease: cubic-bezier(0.4, 0, 0.2, 1);
   display: inline-block;
-  background: linear-gradient(hsl(var(--secondary-foreground)) 0 0)
-    calc(100% - var(--p, 0%)) / 0 var(--p, 0%) no-repeat;
-  transition: 
+  background: linear-gradient(hsl(var(--secondary-foreground)) 0 0) calc(100% - var(--p, 0%)) / 0 var(--p, 0%) no-repeat;
+  transition:
     background-size var(--duration) var(--ease),
     color var(--duration) var(--ease),
     transform var(--duration) var(--ease);
@@ -224,11 +271,13 @@
     color: hsl(var(--secondary-foreground));
     background-size: 0 var(--p, 0%);
   }
+
   50% {
     --p: 100%;
     color: hsl(var(--secondary));
     background-size: 100% var(--p, 0%);
   }
+
   100% {
     --p: 200%;
     color: hsl(var(--secondary-foreground));
@@ -264,7 +313,7 @@ html.dark[data-theme="light"] {
   counter-reset: line;
 }
 
-[data-rehype-pretty-code-figure] code[data-line-numbers] > [data-line]::before {
+[data-rehype-pretty-code-figure] code[data-line-numbers]>[data-line]::before {
   counter-increment: line;
   content: counter(line);
   @apply mr-4 inline-block w-4 text-right text-gray-500;
@@ -290,14 +339,14 @@ html.dark[data-theme="light"] {
   @apply text-sm text-zinc-300 px-3 py-2;
 }
 
-[data-rehype-pretty-code-title] + pre {
+[data-rehype-pretty-code-title]+pre {
   @apply mt-0;
 }
 
-.mdx > .steps:first-child > h3:first-child {
+.mdx>.steps:first-child>h3:first-child {
   @apply mt-0;
 }
 
-.steps > h3 {
+.steps>h3 {
   @apply mt-8 mb-4 text-base font-semibold;
 }
