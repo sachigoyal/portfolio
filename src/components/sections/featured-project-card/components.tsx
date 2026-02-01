@@ -193,13 +193,10 @@ function Content({ children }: { children: React.ReactNode }) {
             "fixed z-50 left-1/2 -translate-x-1/2 top-0",
             "w-full max-w-[calc(100%-2rem)] sm:max-w-2xl",
             "bg-background border shadow-lg rounded-lg overflow-hidden",
-            "flex flex-col"
+            "flex flex-col max-h-[calc(100vh - 8rem)]",
+            state.isChatMode ? "mt-25" : "mt-50",
+            state.isChatMode ? "h-[750px]" : "h-auto",
           )}
-          animate={{
-            marginTop: state.isChatMode ? 80 : 200,
-            height: state.isChatMode ? 650 : "auto",
-            maxHeight: state.isChatMode ? "calc(100vh - 8rem)" : "none",
-          }}
           transition={springTransition}
         >
           {children}
@@ -244,7 +241,7 @@ function Banner({ children }: { children?: React.ReactNode }) {
 
 function Header({ children }: { children: React.ReactNode }) {
   return (
-    <div className="px-4 lg:px-6 py-4 shrink-0">
+    <div className="p-4 lg:p-6 shrink-0">
       {children}
     </div>
   );
@@ -457,7 +454,7 @@ function ThinkingIndicator() {
       transition={springTransition}
       className="flex justify-start"
     >
-      <div className="flex items-center gap-2 px-3.5 py-2.5 rounded-lg bg-muted/30">
+      <div className="flex items-center gap-2 px-3 py-2 rounded-sm bg-muted/30">
         <GeminiLogo className="size-4" />
         <div className="flex items-center gap-1">
           {[0, 1, 2].map((i) => (
@@ -566,7 +563,7 @@ function ChatMessages() {
       transition={springTransition}
     >
       {cardState.isChatMode && (
-        <ScrollArea ref={scrollRef} className="h-full px-4 lg:px-6">
+        <ScrollArea ref={scrollRef} className="h-full p-4 lg:p-6">
           <div className="flex flex-col gap-3 py-2">
             {state.messages.map((message) => (
               <ChatMessage key={message.id} message={message} />
@@ -614,13 +611,13 @@ function ChatInput({ placeholder = "Ask Gemini", autoFocus }: ChatInputProps) {
       <div
         className={cn(
           "relative flex items-center",
-          "bg-muted/30 rounded-xl",
+          "bg-muted/30 rounded-md",
           "ring-1 ring-border/50",
           "focus-within:ring-border focus-within:bg-muted/40",
           "transition-all duration-200"
         )}
       >
-        <div className="absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none">
+        <div className="absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none">
           <GeminiLogo className="size-4" />
         </div>
         <input
@@ -631,7 +628,7 @@ function ChatInput({ placeholder = "Ask Gemini", autoFocus }: ChatInputProps) {
           placeholder={placeholder}
           className={cn(
             "w-full bg-transparent",
-            "pl-11 pr-12 py-2.5 text-sm",
+            "pl-10 pr-12 py-2.5 text-sm",
             "placeholder:text-muted-foreground/50",
             "focus:outline-none"
           )}
@@ -641,16 +638,15 @@ function ChatInput({ placeholder = "Ask Gemini", autoFocus }: ChatInputProps) {
           disabled={!canSubmit}
           initial={false}
           animate={{
-            scale: canSubmit ? 1 : 0.9,
             opacity: canSubmit ? 1 : 0.3,
           }}
           whileHover={canSubmit ? { scale: 1.05 } : undefined}
           whileTap={canSubmit ? { scale: 0.95 } : undefined}
           transition={springTransition}
           className={cn(
-            "absolute right-2 top-1/2 -translate-y-1/2",
-            "size-7 flex items-center justify-center",
-            "rounded-lg",
+            "absolute right-1.5 top-1/2 -translate-y-1/2",
+            "size-8 flex items-center justify-center",
+            "rounded-md",
             "bg-foreground text-background",
             "disabled:cursor-not-allowed",
             "shadow-sm"
@@ -665,7 +661,7 @@ function ChatInput({ placeholder = "Ask Gemini", autoFocus }: ChatInputProps) {
 
 function ChatInputWrapper({ children }: { children: React.ReactNode }) {
   return (
-    <div className="px-4 lg:px-6 pb-4 shrink-0">
+    <div className="p-4 lg:p-6 shrink-0">
       {children}
     </div>
   );
