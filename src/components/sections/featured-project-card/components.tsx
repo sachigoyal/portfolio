@@ -507,7 +507,7 @@ function ChatMessage({ message }: { message: ChatMessage }) {
       transition={springTransition}
       className="flex justify-start"
     >
-      <div className="px-3.5 py-2.5 rounded-lg bg-muted/30 text-sm max-w-full">
+      <div className="px-3.5 py-2.5 rounded-lg bg-muted/30 text-sm max-w-[85%]">
         <ReactMarkdown
           components={{
             p: ({ children }) => (
