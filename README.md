@@ -26,7 +26,9 @@ Personal portfolio website built with Next.js 16, featuring a blog, project show
 Create a `.env.local` file:
 
 ```bash
-GEMINI_API_KEY=your_gemini_api_key
+GEMINI_API_KEY=YOUR_GEMINI_API_KEY
+UPSTASH_REDIS_REST_URL=YOUR_UPSTASH_REDIS_REST_URL
+UPSTASH_REDIS_REST_TOKEN=YOUR_UPSTASH_REDIS_REST_TOKEN
 ```
 
 ### Local Development
