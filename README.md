@@ -157,6 +157,17 @@ gcloud config set account YOUR_EMAIL@gmail.com
 gcloud auth login
 ```
 
+**Environment Variable Validation Errors (e.g., "must be a valid URL"):**
+Do not use quotes around values in `.env.local`. The deploy script passes values literally to Cloud Run, so quoted values will have embedded quotes.
+
+```bash
+# Wrong - quotes become part of the value
+UPSTASH_REDIS_REST_URL="https://example.upstash.io"
+
+# Correct - no quotes
+UPSTASH_REDIS_REST_URL=https://example.upstash.io
+```
+
 ## Scripts
 
 | Command | Description |
