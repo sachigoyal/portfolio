@@ -10,7 +10,7 @@
     "lint": "next lint",
     "docker:dev": "docker compose up dev",
     "docker:prod": "docker compose up prod --build",
-    "deploy": "source .env.local && gcloud run deploy sachi-dev --source . --region=asia-southeast1 --allow-unauthenticated --set-env-vars=GEMINI_API_KEY=$GEMINI_API_KEY",
+    "deploy": "gcloud run deploy sachi-dev --source . --region=asia-southeast1 --allow-unauthenticated --set-env-vars=$(grep -v '^#' .env.local | grep -v '^$' | tr '\\n' ',' | sed 's/,$//')",
     "domain:map": "gcloud beta run domain-mappings create --service=sachi-dev --domain=sachi.dev --region=asia-southeast1 && gcloud beta run domain-mappings create --service=sachi-dev --domain=www.sachi.dev --region=asia-southeast1",
     "domain:status": "gcloud beta run domain-mappings describe --domain=sachi.dev --region=asia-southeast1",
     "domain:list": "gcloud beta run domain-mappings list --region=asia-southeast1"
@@ -25,6 +25,9 @@
     "@radix-ui/react-slot": "^1.2.4",
     "@radix-ui/react-tabs": "^1.1.13",
     "@radix-ui/react-tooltip": "^1.2.8",
+    "@t3-oss/env-nextjs": "^0.13.10",
+    "@upstash/ratelimit": "^2.0.8",
+    "@upstash/redis": "^1.36.1",
     "@vercel/og": "^0.8.5",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
@@ -37,7 +40,8 @@
     "react": "^19.2.1",
     "react-dom": "^19.2.1",
     "react-markdown": "^10.1.0",
-    "tailwind-merge": "^3.4.0"
+    "tailwind-merge": "^3.4.0",
+    "zod": "^4.3.6"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4.1.17",
