@@ -71,27 +71,90 @@ bun run docker:prod
 
 ## Deployment
 
-Deployed on **Google Cloud Run** (Asia South 1 region).
+Deployed on **Google Cloud Run** (Asia Southeast 1 region).
 
-### Deploy to GCP
+### Prerequisites
+
+1. Install [Google Cloud CLI](https://cloud.google.com/sdk/docs/install)
+2. Authenticate with your Google account:
+   ```bash
+   gcloud auth login
+   ```
+3. Set your project:
+   ```bash
+   gcloud config set project YOUR_PROJECT_ID
+   ```
+
+### First-Time Setup
+
+On first deployment, GCP will prompt you to enable required APIs:
+- `artifactregistry.googleapis.com`
+- `cloudbuild.googleapis.com`
+- `run.googleapis.com`
+
+**Grant IAM permissions** to the default Compute Engine service account. Replace `PROJECT_NUMBER` with your project number (found in GCP Console):
+
+```bash
+# Grant Cloud Build permissions
+gcloud projects add-iam-policy-binding YOUR_PROJECT_ID \
+  --member="serviceAccount:PROJECT_NUMBER-compute@developer.gserviceaccount.com" \
+  --role="roles/cloudbuild.builds.builder"
+
+# Grant Storage permissions
+gcloud projects add-iam-policy-binding YOUR_PROJECT_ID \
+  --member="serviceAccount:PROJECT_NUMBER-compute@developer.gserviceaccount.com" \
+  --role="roles/storage.objectAdmin"
+
+# Grant Cloud Run permissions
+gcloud projects add-iam-policy-binding YOUR_PROJECT_ID \
+  --member="serviceAccount:PROJECT_NUMBER-compute@developer.gserviceaccount.com" \
+  --role="roles/run.admin"
+
+# Grant Service Account User permissions
+gcloud projects add-iam-policy-binding YOUR_PROJECT_ID \
+  --member="serviceAccount:PROJECT_NUMBER-compute@developer.gserviceaccount.com" \
+  --role="roles/iam.serviceAccountUser"
+```
+
+> **Tip:** Find your project number by running `gcloud projects describe YOUR_PROJECT_ID --format="value(projectNumber)"`
+
+### Deploy
 
 ```bash
 bun run deploy
 ```
 
 This command:
-1. Builds the Docker image using Cloud Build
-2. Deploys to Cloud Run with the configured environment variables
-3. Makes the service publicly accessible
+1. Loads environment variables from `.env.local`
+2. Builds the Docker image using Cloud Build
+3. Deploys to Cloud Run with the configured environment variables
+4. Makes the service publicly accessible
 
 ### Manual Deployment
 
 ```bash
-gcloud run deploy sachi-dev \
+source .env.local && gcloud run deploy sachi-dev \
   --source . \
-  --region=asia-south1 \
+  --region=asia-southeast1 \
   --allow-unauthenticated \
   --set-env-vars=GEMINI_API_KEY=$GEMINI_API_KEY
+```
+
+### Troubleshooting
+
+**Permission Denied Error:**
+If you see `PERMISSION_DENIED: Build failed because the default service account is missing required IAM permissions`, follow the "First-Time Setup" section above to grant the necessary roles.
+
+**Switch GCP Account:**
+```bash
+# List authenticated accounts
+gcloud auth list
+
+# Switch to a different account
+gcloud config set account YOUR_EMAIL@gmail.com
+
+# Or login with a new account
+gcloud auth login
 ```
 
 ## Scripts
