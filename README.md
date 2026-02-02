@@ -1,36 +1,111 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# sachi.dev
+
+Personal portfolio website built with Next.js 16, featuring a blog, project showcase, and AI-powered interactions.
+
+**Live:** [https://sachi-dev-363173282038.asia-south1.run.app](https://sachi-dev-363173282038.asia-south1.run.app)
+
+## Tech Stack
+
+- **Framework:** Next.js 16 with React 19
+- **Runtime:** Bun
+- **Styling:** Tailwind CSS 4
+- **Content:** Velite (MDX-based content management)
+- **UI Components:** Radix UI, Framer Motion
+- **AI:** Google Gemini API
+- **Deployment:** Google Cloud Run
 
 ## Getting Started
 
-First, run the development server:
+### Prerequisites
+
+- [Bun](https://bun.sh/) installed
+- (Optional) [Docker](https://www.docker.com/) for containerized development
+
+### Environment Variables
+
+Create a `.env.local` file:
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+GEMINI_API_KEY=your_gemini_api_key
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Local Development
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+# Install dependencies
+bun install
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+# Run development server
+bun run dev
+```
 
-## Learn More
+Open [http://localhost:3000](http://localhost:3000) to view the site.
 
-To learn more about Next.js, take a look at the following resources:
+### Docker Development
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```bash
+# Development mode with hot reload
+bun run docker:dev
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+# Production build
+bun run docker:prod
+```
 
-## Deploy on Vercel
+## Project Structure
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```
+├── content/
+│   ├── blogs/          # MDX blog posts
+│   ├── projects/       # MDX project descriptions
+│   └── assets/         # Content images
+├── src/
+│   ├── app/            # Next.js app router pages
+│   ├── components/     # React components
+│   ├── config/         # Site configuration
+│   ├── lib/            # Utility functions
+│   ├── styles/         # Global styles
+│   └── types/          # TypeScript types
+├── public/             # Static assets
+└── velite.config.ts    # Velite content configuration
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Deployment
+
+Deployed on **Google Cloud Run** (Asia South 1 region).
+
+### Deploy to GCP
+
+```bash
+bun run deploy
+```
+
+This command:
+1. Builds the Docker image using Cloud Build
+2. Deploys to Cloud Run with the configured environment variables
+3. Makes the service publicly accessible
+
+### Manual Deployment
+
+```bash
+gcloud run deploy sachi-dev \
+  --source . \
+  --region=asia-south1 \
+  --allow-unauthenticated \
+  --set-env-vars=GEMINI_API_KEY=$GEMINI_API_KEY
+```
+
+## Scripts
+
+| Command | Description |
+|---------|-------------|
+| `bun run dev` | Start development server |
+| `bun run build` | Build for production |
+| `bun run start` | Start production server |
+| `bun run lint` | Run ESLint |
+| `bun run docker:dev` | Run dev server in Docker |
+| `bun run docker:prod` | Build and run production in Docker |
+| `bun run deploy` | Deploy to GCP Cloud Run |
+
+## License
+
+MIT
