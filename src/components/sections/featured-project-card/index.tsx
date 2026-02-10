@@ -60,7 +60,7 @@ export function FeaturedProjectCard(project: Projects) {
           projectContext={{
             title: project.title,
             excerpt: project.excerpt,
-            body: project.body,
+            github: project.github,
           }}
         >
           <ProjectCard.Banner>

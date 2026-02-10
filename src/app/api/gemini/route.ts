@@ -11,14 +11,32 @@ interface Message {
 interface ProjectContext {
   title: string;
   excerpt: string;
-  body: string;
+  github: string;
 }
 
-function buildSystemPrompt(project: ProjectContext): string {
-  return `You are a helpful assistant discussing the project "${project.title}".
-Here is the project description: ${project.excerpt}
-Here is more detail about the project:
-${project.body}
+async function fetchReadme(githubUrl: string): Promise<string | null> {
+  try {
+    const repo = githubUrl.replace(/\/$/, "").split("/").pop();
+    if (!repo) return null;
+    const url = `https://raw.githubusercontent.com/sachigoyal/${repo}/refs/heads/main/README.md`;
+    const res = await fetch(url, { next: { revalidate: 3600 } });
+    if (!res.ok) return null;
+    return await res.text();
+  } catch {
+    return null;
+  }
+}
+
+function buildSystemPrompt(project: ProjectContext, readme: string | null): string {
+  const readmeSection = readme
+    ? `\n\nHere is the project's README:\n${readme}`
+    : "";
+
+  return `You are a helpful assistant on Sachi Goyal's portfolio website (sachi.dev).
+Sachi is a software developer who builds functional web applications using React, Next.js, TailwindCSS, and Shadcn/UI.
+
+You are discussing the project "${project.title}".
+Project summary: ${project.excerpt}${readmeSection}
 
 Help answer questions about this project. Be concise and helpful. Use markdown formatting when appropriate.`;
 }
@@ -73,8 +91,12 @@ export async function POST(request: NextRequest) {
     parts: [{ text: m.content }],
   }));
 
+  const readme = projectContext?.github
+    ? await fetchReadme(projectContext.github)
+    : null;
+
   const systemInstruction = projectContext
-    ? buildSystemPrompt(projectContext)
+    ? buildSystemPrompt(projectContext, readme)
     : undefined;
 
   const ai = new GoogleGenAI({});

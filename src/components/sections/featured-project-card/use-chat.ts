@@ -12,7 +12,7 @@ export interface ChatMessage {
 export interface ProjectContext {
   title: string;
   excerpt: string;
-  body: string;
+  github: string;
 }
 
 interface UseChatOptions {
