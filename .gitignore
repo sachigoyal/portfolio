@@ -43,3 +43,9 @@ next-env.d.ts
 
 .velite
 public/static/*
+
+# opennext / cloudflare
+.open-next
+.dev.vars
+.wrangler
+cloudflare-env.d.ts

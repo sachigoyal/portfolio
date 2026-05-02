@@ -7,7 +7,10 @@
     "dev:velite": "velite dev",
     "build": "SKIP_ENV_VALIDATION=1 velite && SKIP_ENV_VALIDATION=1 next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "preview": "opennextjs-cloudflare build && opennextjs-cloudflare preview",
+    "deploy": "opennextjs-cloudflare build && opennextjs-cloudflare deploy",
+    "cf-typegen": "wrangler types --env-interface CloudflareEnv cloudflare-env.d.ts"
   },
   "dependencies": {
     "@ai-sdk/google": "^3.0.29",
@@ -42,6 +45,7 @@
     "zod": "^4.3.6"
   },
   "devDependencies": {
+    "@opennextjs/cloudflare": "^1.19.5",
     "@tailwindcss/postcss": "^4.1.17",
     "@types/node": "^20.19.25",
     "@types/react": "^19.2.7",
@@ -57,6 +61,7 @@
     "typescript": "^5.9.3",
     "unist-builder": "3.0.0",
     "unist-util-visit": "^4.1.2",
-    "velite": "^0.3.0"
+    "velite": "^0.3.0",
+    "wrangler": "^4.87.0"
   }
 }
