@@ -5,15 +5,9 @@
   "scripts": {
     "dev": "velite && next dev",
     "dev:velite": "velite dev",
-    "build": "velite && next build",
+    "build": "SKIP_ENV_VALIDATION=1 velite && SKIP_ENV_VALIDATION=1 next build",
     "start": "next start",
-    "lint": "next lint",
-    "docker:dev": "docker compose up dev",
-    "docker:prod": "docker compose up prod --build",
-    "deploy": "gcloud run deploy sachi-dev --source . --region=asia-southeast1 --allow-unauthenticated --set-env-vars=$(grep -v '^#' .env.local | grep -v '^$' | tr '\\n' ',' | sed 's/,$//')",
-    "domain:map": "gcloud beta run domain-mappings create --service=sachi-dev --domain=sachi.dev --region=asia-southeast1 && gcloud beta run domain-mappings create --service=sachi-dev --domain=www.sachi.dev --region=asia-southeast1",
-    "domain:status": "gcloud beta run domain-mappings describe --domain=sachi.dev --region=asia-southeast1",
-    "domain:list": "gcloud beta run domain-mappings list --region=asia-southeast1"
+    "lint": "next lint"
   },
   "dependencies": {
     "@ai-sdk/google": "^3.0.29",
