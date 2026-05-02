@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "velite && next dev",
     "dev:velite": "velite dev",
-    "build": "SKIP_ENV_VALIDATION=1 velite && SKIP_ENV_VALIDATION=1 next build",
+    "build": "SKIP_ENV_VALIDATION=1 velite && SKIP_ENV_VALIDATION=1 opennextjs-cloudflare build",
     "start": "next start",
     "lint": "next lint",
     "preview": "opennextjs-cloudflare build && opennextjs-cloudflare preview",
