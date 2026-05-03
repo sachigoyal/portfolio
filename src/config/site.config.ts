@@ -2,7 +2,7 @@ import { SiteConfig } from "@/types";
 
 export const siteConfig: SiteConfig = {
   name: "sachi.dev",
-  title: "Sachi | Software Developer | Hi 👋 I'm Sachi Goyal, a software developer who loves to make pretty web experiences.",
+  title: "Sachi - Software Developer - Hi 👋 I'm Sachi Goyal, a software developer who loves to make pretty web experiences.",
   description: "Hi 👋 I'm Sachi Goyal, a software developer who loves to make pretty web experiences.",
   origin: "https://sachi.dev",
   keywords: [

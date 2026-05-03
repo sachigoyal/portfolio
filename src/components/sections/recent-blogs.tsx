@@ -16,7 +16,7 @@ export function RecentBlogs() {
   return (
     <div className="mt-5 text-sm">
       <p className="font-semibold text-lg">Recent posts</p>
-      <div className="flex flex-col mt-2 -mx-2">
+      <div className="flex flex-col -mx-2">
         {recentBlogs.map((blog) => (
           <BlogCard
             key={blog.slug}
