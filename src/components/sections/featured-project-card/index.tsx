@@ -9,12 +9,8 @@ export { ProjectCard } from "./components";
 
 export function FeaturedProjectCard(project: Projects) {
   const [isActive, setIsActive] = useState(false);
-  const [isChatMode, setIsChatMode] = useState(false);
 
-  const handleClose = useCallback(() => {
-    setIsActive(false);
-    // Removed setIsChatMode(false) so it reopens in the same mode
-  }, []);
+  const handleClose = useCallback(() => setIsActive(false), []);
 
   useEffect(() => {
     function onKeyDown(event: KeyboardEvent) {
@@ -37,52 +33,34 @@ export function FeaturedProjectCard(project: Projects) {
     <ProjectCard.Provider
       project={project}
       isActive={isActive}
-      isChatMode={isChatMode}
       onOpen={() => setIsActive(true)}
       onClose={handleClose}
-      onEnterChatMode={() => setIsChatMode(true)}
-      onExitChatMode={() => setIsChatMode(false)}
     >
-      <ProjectCard.ChatProvider
-        projectContext={{
-          title: project.title,
-          excerpt: project.excerpt,
-          github: project.github,
-        }}
-      >
-        <ProjectCard.Trigger>
-          <div className="flex items-start justify-between gap-2">
-            <div className="flex flex-col gap-0.5 min-w-0">
-              <ProjectCard.TriggerTitle />
-              <ProjectCard.TriggerDescription />
-            </div>
-            <ProjectCard.TriggerLinks />
+      <ProjectCard.Trigger>
+        <div className="flex items-start justify-between gap-2">
+          <div className="flex flex-col gap-0.5 min-w-0">
+            <ProjectCard.TriggerTitle />
+            <ProjectCard.TriggerDescription />
           </div>
-        </ProjectCard.Trigger>
+          <ProjectCard.TriggerLinks />
+        </div>
+      </ProjectCard.Trigger>
 
-        <ProjectCard.Overlay />
+      <ProjectCard.Overlay />
 
-        <ProjectCard.Content>
-          <ProjectCard.Banner>
-            <ProjectCard.CloseButton />
-          </ProjectCard.Banner>
-          <ProjectCard.Header>
-            <div className="flex items-center justify-between gap-4">
-              <ProjectCard.Title />
-              <ProjectCard.Links />
-            </div>
-            <ProjectCard.Description />
-            <ProjectCard.Body />
-          </ProjectCard.Header>
-          <ProjectCard.ChatMessages />
-          <ProjectCard.ChatInputWrapper>
-            <ProjectCard.ChatInput
-              placeholder="Ask Gemini about this project"
-              autoFocus
-            />
-          </ProjectCard.ChatInputWrapper>
-        </ProjectCard.Content>
-      </ProjectCard.ChatProvider>
+      <ProjectCard.Content>
+        <ProjectCard.Banner>
+          <ProjectCard.CloseButton />
+        </ProjectCard.Banner>
+        <ProjectCard.Header>
+          <div className="flex items-center justify-between gap-4">
+            <ProjectCard.Title />
+            <ProjectCard.Links />
+          </div>
+          <ProjectCard.Description />
+          <ProjectCard.Body />
+        </ProjectCard.Header>
+      </ProjectCard.Content>
     </ProjectCard.Provider>
   );
 }
