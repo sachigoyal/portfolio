@@ -3,8 +3,7 @@ import { About } from "@/components/sections/about";
 import { Experience } from "@/components/sections/experience";
 import { Projects } from "@/components/sections/projects";
 import { RecentBlogs } from "@/components/sections/recent-blogs";
-import { GithubContributions, GitmapSkeleton } from "@/components/github-contributions";
-import { Suspense } from "react";
+import { GithubContributions } from "@/components/github-contributions";
 import { siteConfig } from "@/config/site.config";
 
 const personJsonLd = {
@@ -34,9 +33,7 @@ export default function Home() {
       />
       <Intro />
       <About />
-      <Suspense fallback={<GitmapSkeleton className="mt-7 mb-12" />}>
-        <GithubContributions />
-      </Suspense>
+      <GithubContributions />
       <Experience />
       <Projects />
       <RecentBlogs />

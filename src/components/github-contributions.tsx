@@ -1,15 +1,37 @@
+"use client"
+
+import { useEffect, useState } from "react"
 import { Gitmap, ContributionDay } from "@/components/ui/gitmap"
 import { addDays } from "date-fns"
 import { cn } from "@/lib/utils"
 
-const API_BASE = "https://github-contributions-api.jogruber.de/v4"
+const API_URL = "https://github-contributions-api.jogruber.de/v4/sachigoyal"
 
-export async function GithubContributions() {
-  const response = await fetch(`${API_BASE}/sachigoyal`, {
-    next: { revalidate: 3600 }, // Cache for 1 hour
-  })
-  const data = await response.json()
-  const contributions: ContributionDay[] = data.contributions
+// Fetched in the browser on purpose. The home page is prerendered and served
+// from Cloudflare's static assets cache, which is read-only, so server-side
+// revalidation never runs and a server fetch would freeze the graph at the
+// last deploy. The API sends CORS headers and caches on its side.
+export function GithubContributions() {
+  const [contributions, setContributions] = useState<ContributionDay[] | null>(null)
+  const [failed, setFailed] = useState(false)
+
+  useEffect(() => {
+    const controller = new AbortController()
+    fetch(API_URL, { signal: controller.signal })
+      .then((res) => {
+        if (!res.ok) throw new Error(`HTTP ${res.status}`)
+        return res.json()
+      })
+      .then((data: { contributions: ContributionDay[] }) => setContributions(data.contributions))
+      .catch((error) => {
+        if (error.name !== "AbortError") setFailed(true)
+      })
+    return () => controller.abort()
+  }, [])
+
+  if (failed) return null
+  if (!contributions) return <GitmapSkeleton className="mt-7 mb-12" />
+
   const today = new Date()
 
   return (
