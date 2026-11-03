@@ -13,7 +13,7 @@ export async function GithubContributions() {
   const today = new Date()
 
   return (
-    <div data-gitmap-theme="ocean" className="mt-7 mb-8 overflow-x-auto sm:overflow-x-clip">
+    <div data-gitmap-theme="ocean" className="mt-7 mb-12 overflow-x-auto sm:overflow-x-clip">
       <Gitmap
         contributions={contributions}
         from={addDays(today, -365)}

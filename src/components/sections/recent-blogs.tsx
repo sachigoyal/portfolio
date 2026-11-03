@@ -14,7 +14,7 @@ export function RecentBlogs() {
   if (recentBlogs.length === 0) return null;
 
   return (
-    <div className="mt-5 text-sm">
+    <div className="mt-10 text-sm">
       <p className="font-semibold text-lg">Recent posts</p>
       <div className="flex flex-col -mx-2">
         {recentBlogs.map((blog) => (
