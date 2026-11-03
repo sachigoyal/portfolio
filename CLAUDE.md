@@ -10,9 +10,10 @@ bun run dev          # Start dev server (runs Velite then Next.js)
 bun run build        # Production build (Velite + Next.js)
 bun run start        # Start production server
 bun run lint         # Run ESLint
-bun run docker:dev   # Development in Docker with hot reload
-bun run docker:prod  # Production Docker build
-bun run deploy       # Deploy to Google Cloud Run (requires gcloud CLI)
+bun run resume       # Build resume/resume.tex into public/sachi.pdf (needs latexmk)
+bun run preview      # Build with OpenNext and preview locally in the Workers runtime
+bun run deploy       # Build with OpenNext and deploy to Cloudflare Workers
+bun run cf-typegen   # Generate Cloudflare env types (cloudflare-env.d.ts)
 ```
 
 ## Architecture
@@ -33,18 +34,16 @@ bun run deploy       # Deploy to Google Cloud Run (requires gcloud CLI)
 - `src/components/sections/` - Page sections (intro, about, projects, recent-blogs)
 - `src/components/blogs/` - Blog-specific components
 
-### API Routes
-- `/api/gemini` - Streaming Gemini AI chat endpoint (uses ReadableStream)
-- `/api/og` - Dynamic OG image generation with @vercel/og
-
-### Environment Variables
-- `GEMINI_API_KEY` - Required for AI chat functionality (set in `.env.local`)
+### SEO
+- Site title, description, and socials live in `src/config/site.config.ts`
+- OG images: `src/app/opengraph-image.tsx` (site) and `src/app/(main)/blogs/[slug]/opengraph-image.tsx` (posts), both rendered at build time via `src/lib/og.tsx` with Geist fonts from `src/assets/fonts/`. Keep them static: runtime image generation fails on Cloudflare Workers
+- `src/app/sitemap.ts` and `src/app/robots.ts`; Person JSON-LD on the home page
 
 ## Content Categories
 - **Blogs:** development, open-source, thoughts, tutorial, ui-component
 - **Projects:** fullstack, frontend, backend, cli
 
 ## Deployment
-- Deployed on Google Cloud Run (asia-southeast1)
-- `next.config.ts` uses `output: "standalone"` for containerized deployment
-- `/resume` URL rewrites to `/sachi.pdf`
+- Deployed on Cloudflare Workers via `@opennextjs/cloudflare`
+- Worker config lives in `wrangler.jsonc`; OpenNext config in `open-next.config.ts` (static-assets incremental cache)
+- `/resume` redirects to `/sachi.pdf` (a rewrite 404s on Cloudflare, since `public/` is served by the assets layer)
