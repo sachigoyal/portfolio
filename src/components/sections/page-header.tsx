@@ -10,7 +10,7 @@ export function PageHeader({ className }: { className?: string }) {
     <div className={cn("flex items-center justify-between", className)}>
       <div className="flex items-center gap-4">
         <Link href="/" className="font-medium text-sm text-muted-foreground hover:text-foreground hover:underline underline-offset-4 transition-colors">
-          {siteConfig.name}
+          {siteConfig.domain}
         </Link>
       </div>
       <ThemeToggler />
