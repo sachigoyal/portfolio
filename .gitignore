@@ -49,3 +49,5 @@ public/static/*
 .dev.vars
 .wrangler
 cloudflare-env.d.ts
+# resume build output (LaTeX aux files)
+resume/.build

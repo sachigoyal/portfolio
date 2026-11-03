@@ -102,7 +102,7 @@
   % \vspace{-4pt}
   \color{gray}
   \item
-  Last Updated on March 9th, 2026
+  Last Updated on November 3rd, 2026
 \end{flushright}
 
 \vspace{-5pt}
@@ -122,9 +122,46 @@
     {\underline{sachigoyal27@gmail.com}}
 \end{center}
 
+% -------------------- EXPERIENCE --------------------
+\section{Experience}
+  \resumeSubHeadingListStart
+
+    \resumeProjectHeading
+    {\textbf{\href{https://www.meetjamie.ai}{Jamie}} $|$ \footnotesize\emph{Software Engineer, Remote}}{Nov. 2026 -- Present}
+    \resumeItemListStart
+      \resumeItem{Improving Jamie's custom CMS}
+      \resumeItem{Building the marketing site and brand kit}
+      \resumeItem{Keeping new UI consistent with the design system}
+    \resumeItemListEnd
+
+    \resumeProjectHeading
+    {\textbf{\href{https://orgn.com}{Origin}} $|$ \footnotesize\emph{Frontend Engineer, Remote}}{Mar. 2026 -- Oct. 2026}
+    \resumeItemListStart
+      \resumeItem{Improved the UI and UX of existing products}
+      \resumeItem{Worked across multiple products: web apps with React and Tailwind CSS, and a desktop app with SolidJS}
+    \resumeItemListEnd
+
+  \resumeSubHeadingListEnd
+
 % -------------------- PROJECTS --------------------
 \section{Projects}
     \resumeSubHeadingListStart
+
+        \resumeProjectHeading
+        {\textbf{\href{https://rhyme.sachi.dev}{Rhyme}} $|$ \footnotesize\emph{TanStack Start, tldraw, Hono, tRPC, Better Auth, Cloudflare Workers, D1, R2, Durable Objects}}{Sep. 2026}
+        \resumeItemListStart
+            \resumeItem{AI-powered whiteboard where an assistant edits the canvas, running in Cloudflare Durable Objects}
+            \resumeItem{Drawings save locally first, then sync to R2 with version checks in D1; guest drawings import on sign-in}
+            \resumeItem{Workers AI with a monthly token budget per user, plus encrypted bring-your-own API keys}
+        \resumeItemListEnd
+
+        \resumeProjectHeading
+        {\textbf{\href{https://rubik.sachi.dev}{Rubik}} $|$ \footnotesize\emph{React, Vite, TanStack Router, Hono, tRPC, Better Auth, Drizzle ORM, Neon DB, Cloudflare Workers}}{Aug. 2026}
+        \resumeItemListStart
+            \resumeItem{Fullstack Cloudflare template: Hono and tRPC API on Workers with end-to-end types to a React 19 SPA}
+            \resumeItem{Email, GitHub, and Google sign-in with Better Auth; verification emails sent through Cloudflare Email Service}
+            \resumeItem{Turborepo monorepo with a shared Drizzle schema on Neon Postgres and a Base UI component package}
+        \resumeItemListEnd
 
         \resumeProjectHeading
         {\textbf{\href{https://akira.sachi.dev}{Akira}} $|$ \footnotesize\emph{Next.js, TypeScript, Better Auth, Drizzle ORM, Neon DB, Dodo Payments, Resend}}{Mar. 2026}
@@ -143,35 +180,11 @@
         \resumeItemListEnd
 
         \resumeProjectHeading
-        {\textbf{\href{https://maskit.sachi.dev}{MaskIt}} $|$ \footnotesize\emph{Next.js, TypeScript, Zustand, Radix UI, Motion, Tailwind CSS}}{Feb. 2026}
-        \resumeItemListStart
-            \resumeItem{CSS mask effects editor with multi-layer composition, clip-path shapes, filters, and blend modes}
-            \resumeItem{Zustand-backed state for real-time preview sync as users adjust mask parameters}
-            \resumeItem{Exports production-ready CSS code and rasterized images from the canvas}
-        \resumeItemListEnd
-
-        \resumeProjectHeading
         {\textbf{\href{https://notes.sachi.dev}{Notes}} $|$ \footnotesize\emph{Next.js, TypeScript, TipTap, Drizzle ORM, Neon DB, Better Auth, SCSS}}{Jan. 2026}
         \resumeItemListStart
             \resumeItem{Rich text note editor built on TipTap with folder organization and auto-save}
             \resumeItem{Auth flow using Better Auth, with Drizzle ORM and Neon Postgres handling user and note persistence}
             \resumeItem{Dark/light theme support using custom SCSS alongside Tailwind CSS}
-        \resumeItemListEnd
-
-\resumeProjectHeading
-        {\textbf{\href{https://betternews.sachi.dev}{BetterNews}} $|$ \footnotesize\emph{Next.js, TypeScript, Shadcn UI, Drizzle ORM, Better Auth, Neon DB}}{Dec. 2025}
-        \resumeItemListStart
-            \resumeItem{Built a Hacker News–style content aggregation platform with posts, comments, and upvotes}
-            \resumeItem{Designed relational schemas for users, posts, comments, and votes using Drizzle ORM}
-            \resumeItem{Implemented server actions, optimized queries, and SSR for fast initial load}
-        \resumeItemListEnd
-
-\resumeProjectHeading
-        {\textbf{\href{https://stashly.sachi.dev}{Stashly}} $|$ \footnotesize\emph{Next.js, TypeScript, Shadcn UI, ImageKit, Clerk, Drizzle ORM, Neon DB}}{May 2025}
-        \resumeItemListStart
-            \resumeItem{Image storage and sharing platform with authenticated access control via Clerk}
-            \resumeItem{ImageKit integration for optimized uploads, transformations, and CDN delivery}
-            \resumeItem{Drizzle ORM with Neon serverless Postgres for schema management and queries}
         \resumeItemListEnd
 
     \resumeSubHeadingListEnd
@@ -181,36 +194,22 @@
  \begin{itemize}[leftmargin=0.15in, label={}]
     \small{\item{
      \textbf{Languages}{: JavaScript, TypeScript, C, C++} \\
-     \textbf{Frameworks}{: React, Next.js, Express.js, Hono, Elysia.js} \\
-     \textbf{UI \& Styling}{: Tailwind CSS, Shadcn UI, Radix UI, Motion} \\
-     \textbf{Auth}{: Better Auth, Clerk} \\
-     \textbf{Databases}{: MongoDB, PostgreSQL, MySQL, Redis} \\
-     \textbf{Dev Tools}{: Git, GitHub, Bun, Docker, Cloudflare, GCP} \\
-     \textbf{IDEs}{: VS Code, Cursor, Claude Code}
+     \textbf{Frameworks}{: React, Next.js, TanStack Start, SolidJS, Hono, Express.js} \\
+     \textbf{UI \& Styling}{: Tailwind CSS, Shadcn UI, Base UI, Radix UI, Motion} \\
+     \textbf{Backend \& Data}{: tRPC, Better Auth, Drizzle ORM, PostgreSQL, Redis, MongoDB} \\
+     \textbf{Cloudflare}{: Workers, D1, R2, Durable Objects, Workers AI} \\
+     \textbf{Tools}{: Git, GitHub, Bun, pnpm, Turborepo, Docker, VS Code, Cursor, Claude Code}
     }}
  \end{itemize}
-
-% -------------------- EXPERIENCE --------------------
-\section{Experience}
-  \resumeSubHeadingListStart
-
-          \resumeProjectHeading
-          {\textbf{\href{https://arc1.io}{arc1}} $|$ \footnotesize\emph{Intern}}{Jul. 2025}
-         \resumeItemListStart
-            \resumeItem{Built composable React components with Base UI for reusable, headless UI primitives}
-            \resumeItem{Built custom UI for a large-scale video processing pipeline}
-         \resumeItemListEnd
-          
-    \resumeSubHeadingListEnd 
 
 % -------------------- EDUCATION --------------------
 \section{Education}
   \resumeSubHeadingListStart
-  
+
     \resumeSubheading
       {Government College for Girls, Ludhiana}{May 2025}
       {Bachelor's of Computer Applications (BCA)}{Percentage: 75\%}
 
   \resumeSubHeadingListEnd
 
-\end{document}  
+\end{document}
