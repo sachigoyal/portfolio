@@ -22,10 +22,15 @@ const fontHeading = Inter({
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.origin),
-  title: siteConfig.title,
+  title: {
+    default: siteConfig.title,
+    template: `%s · ${siteConfig.name}`,
+  },
   description: siteConfig.description,
   keywords: siteConfig.keywords,
+  authors: [{ name: siteConfig.name, url: siteConfig.origin }],
   creator: siteConfig.name,
+  alternates: { canonical: "/" },
   icons: {
     icon: "/favicon.png",
     shortcut: "/favicon.png",
@@ -33,30 +38,17 @@ export const metadata: Metadata = {
   openGraph: {
     title: siteConfig.title,
     description: siteConfig.description,
-    url: siteConfig.origin,
+    url: "/",
     siteName: siteConfig.name,
-    images: [
-      {
-        url: siteConfig.og,
-        width: 2880,
-        height: 1800,
-        alt: siteConfig.name,
-      },
-    ],
     type: "website",
     locale: "en_US",
   },
   twitter: {
     card: "summary_large_image",
-    site: siteConfig.socials.x,
+    site: siteConfig.socials.xHandle,
+    creator: siteConfig.socials.xHandle,
     title: siteConfig.title,
     description: siteConfig.description,
-    images: {
-      url: siteConfig.og,
-      width: 2880,
-      height: 1800,
-      alt: siteConfig.name,
-    },
   },
 };
 

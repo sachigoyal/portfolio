@@ -1,21 +1,23 @@
 export type SiteConfig = {
   name: string;
+  domain: string;
   title: string;
   description: string;
   origin: string;
-  og: string;
-  keywords: string[];
-  creator: {
+  jobTitle: string;
+  company: {
     name: string;
     url: string;
-  }
+  };
+  keywords: string[];
   socials: {
     github: string;
     x: string;
+    xHandle: string;
     linkedin: string;
     buymeacoffee: string;
-  }
-}
+  };
+};
 export type GithubContributionsResponse = {
   total: Record<string, number>
   contributions: {

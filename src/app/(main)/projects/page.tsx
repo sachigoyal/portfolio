@@ -6,12 +6,14 @@ import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: `Projects - ${siteConfig.name}`,
+  title: "Projects",
   description: "Projects I've built.",
+  alternates: { canonical: "/projects" },
   openGraph: {
-    title: `Projects | ${siteConfig.name}`,
+    title: `Projects · ${siteConfig.name}`,
     description: "Projects I've built.",
-    url: `${siteConfig.origin}/projects`,
+    url: "/projects",
+    images: "/opengraph-image",
   },
 };
 

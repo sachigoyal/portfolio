@@ -36,40 +36,25 @@ export async function generateMetadata({
     return {};
   }
 
-  const ogUrl = new URL(`${siteConfig.origin}/api/og`);
-  ogUrl.searchParams.set("title", blog.title);
-  if (blog.author) {
-    ogUrl.searchParams.set("author", blog.author);
-  }
+  const url = `/blogs/${blog.slugAsParams}`;
 
   return {
-    title: `${blog.title} | ${siteConfig.name}`,
+    title: blog.title,
     description: blog.excerpt,
-    keywords: [...blog.tags, ...siteConfig.keywords, blog.title],
+    keywords: [...blog.tags, blog.title, ...siteConfig.keywords],
+    alternates: { canonical: url },
     openGraph: {
       title: blog.title,
       description: blog.excerpt,
       type: "article",
-      url: `${siteConfig.origin}/blogs/${blog.slugAsParams}`,
-      images: [
-        {
-          url: ogUrl.toString(),
-          width: 1200,
-          height: 630,
-          alt: blog.title,
-        },
-      ],
+      url,
+      publishedTime: new Date(blog.date).toISOString(),
+      authors: [blog.author ?? siteConfig.name],
     },
     twitter: {
       card: "summary_large_image",
       title: blog.title,
       description: blog.excerpt,
-      images: {
-        url: ogUrl.toString(),
-        width: 1200,
-        height: 630,
-        alt: blog.title,
-      },
     },
   };
 }
