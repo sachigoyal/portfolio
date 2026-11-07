@@ -6,6 +6,9 @@ import { RecentBlogs } from "@/components/sections/recent-blogs";
 import { GithubContributions } from "@/components/github-contributions";
 import { siteConfig } from "@/config/site.config";
 
+// Cache the complete server-rendered homepage for one day.
+export const revalidate = 86400;
+
 const personJsonLd = {
   "@context": "https://schema.org",
   "@type": "Person",

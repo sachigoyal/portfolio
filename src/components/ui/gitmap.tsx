@@ -85,8 +85,8 @@ const LEVEL_COLORS: Record<0 | 1 | 2 | 3 | 4, keyof GitmapColors> = {
 
 interface GitmapProps {
   contributions: ContributionDay[]
-  from: Date
-  to: Date
+  from: Date | string
+  to: Date | string
   colors: GitmapColors
   cellSize?: number
   cellGap?: number
@@ -109,7 +109,10 @@ export function Gitmap({
   className,
 }: GitmapProps) {
   const cellTotal = cellSize + cellGap
-  const weeks = generateWeeks(from, to, contributions)
+  // Calendar-date strings keep SSR and hydration on the same days across time zones.
+  const rangeFrom = typeof from === "string" ? parse(from, "yyyy-MM-dd", new Date()) : from
+  const rangeTo = typeof to === "string" ? parse(to, "yyyy-MM-dd", new Date()) : to
+  const weeks = generateWeeks(rangeFrom, rangeTo, contributions)
   const monthLabels = getMonthLabels(weeks, cellSize, cellGap)
 
   const gridHeight = 7 * cellSize + 6 * cellGap

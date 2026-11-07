@@ -45,5 +45,5 @@ bun run cf-typegen   # Generate Cloudflare env types (cloudflare-env.d.ts)
 
 ## Deployment
 - Deployed on Cloudflare Workers via `@opennextjs/cloudflare`
-- Worker config lives in `wrangler.jsonc`; OpenNext config in `open-next.config.ts` (static-assets incremental cache)
+- Worker config lives in `wrangler.jsonc`; OpenNext config in `open-next.config.ts` (R2 incremental cache with a Durable Object revalidation queue)
 - `/resume` redirects to `/sachi.pdf` (a rewrite 404s on Cloudflare, since `public/` is served by the assets layer)

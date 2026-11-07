@@ -55,6 +55,8 @@ Open [http://localhost:3000](http://localhost:3000) to view the site.
 
 Deployed on **Cloudflare Workers** using [`@opennextjs/cloudflare`](https://opennext.js.org/cloudflare). Worker settings live in `wrangler.jsonc`.
 
+The homepage includes the GitHub graph in its server-rendered HTML and uses a shared 24-hour ISR cache. OpenNext stores the page in the `portfolio-incremental-cache` R2 bucket; a Durable Object queue refreshes stale pages in the background. Failed refreshes retain the previous page. `bun run deploy` provisions the R2 bucket and populates the cache; R2 must be enabled on the Cloudflare account. `bun run dev` renders on each request, while `bun run preview` exercises the Workers cache locally.
+
 ### First-Time Setup
 
 Log in to Cloudflare:
